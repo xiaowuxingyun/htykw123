@@ -1,0 +1,11 @@
+subplot(221);imshow(I);title('原图')
+f=rgb2gray(I);
+F=fft2(f);%Fourier变换
+F1=log(abs(F)+1);%取模、缩放
+subplot(222);imshow(F1,[]);title('傅里叶变换后频谱');
+Fs=fftshift(F);
+S=log(abs(Fs)+1);
+subplot(223);imshow(S,[]);title('频移后的频谱');
+fr=real(ifft2(ifftshift(Fs)));%逆变换、取实部
+ret=im2uint8(mat2gray(fr));
+subplot(224);imshow(ret);title('逆变换结果');
